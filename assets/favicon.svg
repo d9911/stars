@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Star Rating</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#182132" />
+      <stop offset="1" stop-color="#080b12" />
+    </linearGradient>
+    <linearGradient id="star" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffd166" />
+      <stop offset="1" stop-color="#ff8fd8" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <path d="m256 92 48 98 108 16-78 76 18 108-96-51-96 51 18-108-78-76 108-16z" fill="url(#star)" stroke="#fff1ba" stroke-width="12" stroke-linejoin="round" />
+</svg>
