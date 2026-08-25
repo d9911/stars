@@ -35,7 +35,7 @@
 	  <meta name="description" content="Выберите и отобразите оценку от одной до пяти звёзд в доступном браузерном интерфейсе." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#080b12" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://stars.d9911.org/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Star Rating — интерактивная оценка звёздами" />
@@ -71,10 +71,27 @@
 	</head>
 	<body>
 		<main class="rating-card" id="main-content">
-		<h1>Оценка звёздами</h1>
-		<p>Выберите оценку от одной до пяти звёзд.</p>
-		<div class="stars" id="stars" aria-hidden="true">
-			<div class="star inactive" data-value="1">
+		<header class="card-header">
+			<div class="header-row">
+				<h1 data-i18n="heading">Оценка звёздами</h1>
+				<div class="app-controls">
+				<label class="sr-only" for="languageSelect" data-i18n="language">Язык</label>
+				<select id="languageSelect" class="language-select--native" tabindex="-1" aria-hidden="true" hidden><option value="ru">RU</option><option value="en">EN</option><option value="es">ES</option></select>
+				<div class="language-menu">
+					<button class="language-menu__trigger" id="language-menu-button" type="button" aria-label="Язык: Русский" aria-haspopup="menu" aria-expanded="false" aria-controls="language-menu-list"><span class="language-menu__flag" aria-hidden="true">RU</span><span class="language-menu__label">Русский</span><svg class="language-menu__chevron" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10.5832 6.00002L7.99657 8.58669L5.4099 6.00002C5.1499 5.74002 4.7299 5.74002 4.4699 6.00002C4.2099 6.26002 4.2099 6.68002 4.4699 6.94002L7.5299 10C7.7899 10.26 8.2099 10.26 8.4699 10L11.5299 6.94002C11.7899 6.68002 11.7899 6.26002 11.5299 6.00002C11.2699 5.74669 10.8432 5.74002 10.5832 6.00002Z" fill="currentColor" /></svg></button>
+					<div class="language-menu__panel" id="language-menu-list" role="menu" aria-labelledby="language-menu-button" hidden>
+						<button class="language-menu__option" type="button" role="menuitemradio" aria-checked="false" data-language="en" data-flag="EN"><span class="language-menu__flag" aria-hidden="true">EN</span><span>English</span><span class="language-menu__check" aria-hidden="true">✓</span></button>
+						<button class="language-menu__option" type="button" role="menuitemradio" aria-checked="false" data-language="es" data-flag="ES"><span class="language-menu__flag" aria-hidden="true">ES</span><span>Español</span><span class="language-menu__check" aria-hidden="true">✓</span></button>
+						<button class="language-menu__option" type="button" role="menuitemradio" aria-checked="true" data-language="ru" data-flag="RU"><span class="language-menu__flag" aria-hidden="true">RU</span><span>Русский</span><span class="language-menu__check" aria-hidden="true">✓</span></button>
+					</div>
+				</div>
+					<button id="themeToggle" type="button" aria-label="Включить светлую тему"></button>
+				</div>
+			</div>
+			<p data-i18n="subtitle">Выберите оценку от одной до пяти звёзд.</p>
+		</header>
+		<div class="stars" id="stars" role="group" aria-label="Количество звёзд" data-i18n-aria-label="ratingLabel">
+			<button class="star inactive" type="button" data-value="1" aria-pressed="false">
 				<!-- SVG звезды -->
 				<svg
 					width="24"
@@ -88,8 +105,8 @@
 						stroke="#F0C016"
 					/>
 				</svg>
-			</div>
-			<div class="star inactive" data-value="2">
+			</button>
+			<button class="star inactive" type="button" data-value="2" aria-pressed="false">
 				<svg
 					width="24"
 					height="24"
@@ -102,8 +119,8 @@
 						stroke="#F0C016"
 					/>
 				</svg>
-			</div>
-			<div class="star inactive" data-value="3">
+			</button>
+			<button class="star inactive" type="button" data-value="3" aria-pressed="false">
 				<svg
 					width="24"
 					height="24"
@@ -116,8 +133,8 @@
 						stroke="#F0C016"
 					/>
 				</svg>
-			</div>
-			<div class="star inactive" data-value="4">
+			</button>
+			<button class="star inactive" type="button" data-value="4" aria-pressed="false">
 				<svg
 					width="24"
 					height="24"
@@ -130,8 +147,8 @@
 						stroke="#F0C016"
 					/>
 				</svg>
-			</div>
-			<div class="star inactive" data-value="5">
+			</button>
+			<button class="star inactive" type="button" data-value="5" aria-pressed="false">
 				<svg
 					width="24"
 					height="24"
@@ -144,11 +161,11 @@
 						stroke="#F0C016"
 					/>
 				</svg>
-			</div>
+			</button>
 		</div>
 
 		<!-- Селектор для выбора количества звёзд -->
-		<label for="ratingSelector">Количество звёзд</label>
+		<label for="ratingSelector" data-i18n="ratingLabel">Количество звёзд</label>
 		<select id="ratingSelector">
 			<option value="1">1 звезда</option>
 			<option value="2">2 звезды</option>
@@ -157,39 +174,153 @@
 			<option value="5">5 звёзд</option>
 		</select>
 		<output id="ratingOutput" for="ratingSelector" aria-live="polite">3 из 5</output>
+		<button class="download-button" id="downloadSvg" type="button" data-i18n="downloadSvg">Скачать SVG</button>
+		<footer class="app-footer"><span data-i18n="footer">Интерактивная оценка работает локально.</span><a href="https://d9911.org/">d9911.org</a></footer>
 		</main>
 
 		<script>
-			const stars = document.getElementById('stars').children;
+			const stars = [...document.querySelectorAll('#stars .star')];
 			const ratingSelector = document.getElementById('ratingSelector');
 			const ratingOutput = document.getElementById('ratingOutput');
+			const downloadSvg = document.getElementById('downloadSvg');
+			const languageSelect = document.getElementById('languageSelect');
+			const themeToggle = document.getElementById('themeToggle');
+			const starPath = 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z';
+			const translations = {
+				ru: { title: 'Star Rating — интерактивная оценка звёздами', description: 'Выберите и отобразите оценку от одной до пяти звёзд в доступном браузерном интерфейсе.', language: 'Язык', heading: 'Оценка звёздами', subtitle: 'Выберите оценку от одной до пяти звёзд.', ratingLabel: 'Количество звёзд', downloadSvg: 'Скачать SVG', footer: 'Интерактивная оценка работает локально.', light: 'Включить светлую тему', dark: 'Включить тёмную тему', outOf: 'из', star: 'звезда', stars: 'звезды', starsMany: 'звёзд' },
+				en: { title: 'Star Rating — interactive rating', description: 'Choose and display a rating from one to five stars in an accessible browser interface.', language: 'Language', heading: 'Star rating', subtitle: 'Choose a rating from one to five stars.', ratingLabel: 'Number of stars', downloadSvg: 'Download SVG', footer: 'The interactive rating runs locally.', light: 'Use light theme', dark: 'Use dark theme', outOf: 'of', star: 'star', stars: 'stars', starsMany: 'stars' },
+				es: { title: 'Star Rating — valoración interactiva', description: 'Elige y muestra una valoración de una a cinco estrellas en una interfaz accesible.', language: 'Idioma', heading: 'Valoración por estrellas', subtitle: 'Elige una valoración de una a cinco estrellas.', ratingLabel: 'Número de estrellas', downloadSvg: 'Descargar SVG', footer: 'La valoración interactiva funciona localmente.', light: 'Usar tema claro', dark: 'Usar tema oscuro', outOf: 'de', star: 'estrella', stars: 'estrellas', starsMany: 'estrellas' },
+			};
+			let language = 'ru';
+			const t = key => translations[language][key] || key;
 
-			// Функция для обновления количества активных звёзд
+			function applyLanguage(next) {
+				language = translations[next] ? next : 'en';
+				localStorage.setItem('starsLanguage', language);
+				document.documentElement.lang = language;
+				document.title = t('title');
+				document.querySelector('meta[name="description"]').content = t('description');
+				document.querySelectorAll('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
+				document.querySelectorAll('[data-i18n-aria-label]').forEach(element => { element.setAttribute('aria-label', t(element.dataset.i18nAriaLabel)); });
+				languageSelect.setAttribute('aria-label', t('language'));
+				ratingSelector.querySelectorAll('option').forEach(option => { const count = Number(option.value); option.textContent = `${count} ${count === 1 ? t('star') : count < 5 ? t('stars') : t('starsMany')}`; });
+				languageSelect.value = language;
+				updateLanguageMenu();
+				updateStars(Number(ratingSelector.value));
+			}
+
+			function updateLanguageMenu() {
+				const button = document.getElementById('language-menu-button');
+				const selected = document.querySelector(`.language-menu__option[data-language="${language}"]`);
+				if (!button || !selected) return;
+				const name = selected.querySelector('span:nth-child(2)').textContent;
+				button.querySelector('.language-menu__flag').textContent = selected.dataset.flag;
+				button.querySelector('.language-menu__label').textContent = name;
+				button.setAttribute('aria-label', `${t('language')}: ${name}`);
+				document.querySelectorAll('.language-menu__option').forEach(option => option.setAttribute('aria-checked', String(option === selected)));
+			}
+
+			function setupLanguageMenu() {
+				const root = document.querySelector('.language-menu');
+				const button = document.getElementById('language-menu-button');
+				const panel = document.getElementById('language-menu-list');
+				const options = [...document.querySelectorAll('.language-menu__option')];
+				const close = focus => { button.setAttribute('aria-expanded', 'false'); panel.hidden = true; if (focus) button.focus(); };
+				const open = last => { button.setAttribute('aria-expanded', 'true'); panel.hidden = false; (last ? options.at(-1) : options.find(option => option.getAttribute('aria-checked') === 'true') || options[0]).focus(); };
+				button.addEventListener('click', () => button.getAttribute('aria-expanded') === 'true' ? close() : open());
+				button.addEventListener('keydown', event => { if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); open(event.key === 'ArrowUp'); } });
+				options.forEach(option => option.addEventListener('click', () => { languageSelect.value = option.dataset.language; languageSelect.dispatchEvent(new Event('change')); close(true); }));
+				panel.addEventListener('keydown', event => {
+					const index = options.indexOf(document.activeElement);
+					if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+						event.preventDefault();
+						const next = event.key === 'Home' ? 0 : event.key === 'End' ? options.length - 1 : event.key === 'ArrowDown' ? (index + 1) % options.length : (index - 1 + options.length) % options.length;
+						options[next].focus();
+					}
+					if (event.key === 'Escape') { event.preventDefault(); close(true); }
+				});
+				document.addEventListener('pointerdown', event => { if (!root.contains(event.target)) close(); });
+			}
+
+			function applyTheme(next) {
+				const theme = next === 'light' ? 'light' : 'dark';
+				document.documentElement.dataset.theme = theme;
+				localStorage.setItem('starsTheme', theme);
+				document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#080b12' : '#eef6ff';
+				themeToggle.innerHTML = theme === 'dark'
+					? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2.25M12 19.75V22M4.93 4.93l1.59 1.59M17.48 17.48l1.59 1.59M2 12h2.25M19.75 12H22M4.93 19.07l1.59-1.59M17.48 6.52l1.59-1.59"/></svg>'
+					: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.2A8.5 8.5 0 0 1 8.8 3.6 8.5 8.5 0 1 0 20.4 15.2Z"/></svg>';
+				themeToggle.setAttribute('aria-label', t(theme === 'dark' ? 'light' : 'dark'));
+			}
+
+			function paintStars(rating) {
+				stars.forEach((star, index) => {
+					star.classList.toggle('active', index < rating);
+					star.classList.toggle('inactive', index >= rating);
+				});
+			}
+
 			function updateStars(rating) {
-				// Сбрасываем все звёзды к неактивным
-				for (let i = 0; i < stars.length; i++) {
-					stars[i].classList.remove('active');
-					stars[i].classList.add('inactive');
-				}
+				const selectedRating = Math.min(5, Math.max(1, Number(rating) || 1));
+				paintStars(selectedRating);
+				ratingSelector.value = String(selectedRating);
+				stars.forEach((star, index) => {
+					star.setAttribute('aria-pressed', String(index + 1 === selectedRating));
+					star.setAttribute('aria-label', ratingSelector.options[index].textContent);
+				});
+				ratingOutput.textContent = `${selectedRating} ${t('outOf')} 5`;
+			}
 
-				// Активируем звёзды на основе рейтинга
-				for (let i = 0; i < rating; i++) {
-					stars[i].classList.remove('inactive');
-					stars[i].classList.add('active');
-				}
-				ratingOutput.textContent = `${rating} из 5`;
+			function createRatingSvg(rating, theme) {
+				const selectedRating = Math.min(5, Math.max(1, Number(rating) || 1));
+				const empty = theme === 'light' ? '#e8edf3' : '#182132';
+				const title = `${selectedRating} ${t('outOf')} 5`;
+				const paths = Array.from({ length: 5 }, (_, index) => {
+					const fill = index < selectedRating ? '#ffd166' : empty;
+					return `<path d="${starPath}" transform="translate(${index * 52} 4) scale(2)" fill="${fill}" stroke="#f0c016" stroke-width="1" stroke-linejoin="round"/>`;
+				}).join('');
+				return `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="56" viewBox="0 0 256 56" role="img" aria-labelledby="title"><title id="title">${title}</title>${paths}</svg>`;
+			}
+
+			function downloadRatingSvg() {
+				const rating = Number(ratingSelector.value);
+				const svg = createRatingSvg(rating, document.documentElement.dataset.theme);
+				const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }));
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = `star-rating-${rating}-of-5.svg`;
+				link.click();
+				setTimeout(() => URL.revokeObjectURL(url), 0);
 			}
 
 			// Обработчик изменения селектора
-			ratingSelector.addEventListener('change', function () {
-				const selectedRating = parseInt(this.value);
-				updateStars(selectedRating);
+			ratingSelector.addEventListener('change', () => updateStars(ratingSelector.value));
+			stars.forEach(star => {
+				const rating = Number(star.dataset.value);
+				star.addEventListener('click', () => updateStars(rating));
+				star.addEventListener('pointerenter', () => paintStars(rating));
+				star.addEventListener('pointerleave', () => paintStars(Number(ratingSelector.value)));
+				star.addEventListener('keydown', event => {
+					const nextRating = event.key === 'Home' ? 1 : event.key === 'End' ? 5 : ['ArrowRight', 'ArrowUp'].includes(event.key) ? Math.min(5, rating + 1) : ['ArrowLeft', 'ArrowDown'].includes(event.key) ? Math.max(1, rating - 1) : null;
+					if (nextRating === null) return;
+					event.preventDefault();
+					updateStars(nextRating);
+					stars[nextRating - 1].focus();
+				});
 			});
+			downloadSvg.addEventListener('click', downloadRatingSvg);
 
 			// Пример: по умолчанию устанавливаем 3 звезды
 			const defaultRating = 3;
 			ratingSelector.value = defaultRating;
-			updateStars(defaultRating);
+			const query = new URLSearchParams(window.location.search).get('lang');
+			const savedLanguage = localStorage.getItem('starsLanguage');
+			const browser = navigator.language.toLowerCase();
+			applyLanguage(translations[query] ? query : translations[savedLanguage] ? savedLanguage : browser.startsWith('ru') ? 'ru' : browser.startsWith('es') ? 'es' : 'en');
+			applyTheme(localStorage.getItem('starsTheme') === 'light' ? 'light' : 'dark');
+			languageSelect.addEventListener('change', () => { applyLanguage(languageSelect.value); applyTheme(document.documentElement.dataset.theme); });
+			setupLanguageMenu();
+			themeToggle.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 		</script>
 	</body>
 </html>
