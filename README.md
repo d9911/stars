@@ -1,100 +1,53 @@
-# en
+English | [Español](README.es.md) | [Русский](README.ru.md)
 
-Star Rating Component
+# Star Rating
 
-This project is a simple star rating component created with HTML, CSS, and JavaScript. It allows users to dynamically select and display a star rating from 1 to 5 stars.
-Features
+An accessible browser interface for selecting and displaying a rating from one to five stars.
 
-Displays 5 stars by default.
-Dynamically updates the number of active stars based on user selection.
-Uses a dropdown (<select>) to choose the rating.
-Easy to integrate into any web project.
-Installation
+## Web address
 
-Copy the HTML, CSS, and JavaScript into your project.
-Ensure the styles are included for proper star rendering.
-Use the component in any part of your webpage.
-Usage
+[stars.d9911.org](https://stars.d9911.org/)
 
-Example:
+## Features
 
-The updateStars() function is used to set the number of active stars, and ratingSelector is the dropdown menu that allows users to select from 1 to 5 stars.
-Project Structure
+- Selects a rating from one to five through star buttons or a select control.
+- Updates the active stars, live rating output, and accessible button state.
+- Previews a rating on pointer hover and downloads the current rating as an SVG file.
+- Provides light and dark themes and English, Spanish, and Russian interface translations.
 
-# es
+## Usage
 
-Componente de Calificación de Estrellas
+1. Select a rating with the star buttons or the dropdown.
+2. Review the updated text output and visual stars.
+3. Choose **Download SVG** to save the current rating graphic.
 
-Este proyecto es un componente de calificación de estrellas simple creado con HTML, CSS y JavaScript. Permite a los usuarios seleccionar y mostrar dinámicamente una calificación de 1 a 5 estrellas.
-Características
+## Run locally
 
-Muestra 5 estrellas por defecto.
-Actualiza dinámicamente el número de estrellas activas según la selección del usuario.
-Utiliza un menú desplegable (<select>) para elegir la calificación.
-Fácil de integrar en cualquier proyecto web.
-Instalación
+This is a static site. From the repository root, serve the files with any static HTTP server, for example:
 
-Copia el HTML, CSS y JavaScript en tu proyecto.
-Asegúrate de que los estilos estén incluidos para la representación correcta de las estrellas.
-Usa el componente en cualquier parte de tu página web.
-Uso
-
-Ejemplo:
-
-La función updateStars() se utiliza para establecer el número de estrellas activas, y ratingSelector es el menú desplegable que permite a los usuarios seleccionar de 1 a 5 estrellas.
-Estructura del Proyecto
-
-# ru
-
-# Star Rating Component
-
-Это простой компонент для динамического отображения звёзд (рейтинга) с возможностью выбора количества звёзд. Компонент написан на чистом HTML, CSS и JavaScript, и его можно легко интегрировать в любой проект.
-
-## Функциональность
-
-- Отображает 5 звёзд.
-- Активирует определённое количество звёзд на основе значения, выбранного пользователем.
-- Селектор для выбора от 1 до 5 звёзд.
-
-## Установка
-
-1. Скопируйте HTML, CSS и JS код в нужный файл проекта.
-2. Убедитесь, что подключили стили для корректного отображения звёзд.
-3. Используйте компонент в любом месте на странице.
-
-## Использование
-
-Этот компонент использует селектор для выбора количества звёзд, и динамически отображает активные звёзды на основе выбранного значения.
-
-### Пример использования:
-
-```html
-<div class="stars" id="stars">
-	<!-- звёзды будут автоматически обновляться в зависимости от выбранного значения -->
-</div>
-
-<select id="ratingSelector">
-	<option value="1">1 звезда</option>
-	<option value="2">2 звезды</option>
-	<option value="3">3 звезды</option>
-	<option value="4">4 звезды</option>
-	<option value="5">5 звёзд</option>
-</select>
+```bash
+python3 -m http.server 8000
 ```
 
-JavaScript логика:
-Функция updateStars(rating) обновляет активные звёзды на основе выбранного рейтинга.
-Селектор ratingSelector используется для выбора количества звёзд от 1 до 5.
-Структура проекта
+Then open [http://localhost:8000](http://localhost:8000).
 
-```yaml
-project/
-│
-├── index.html    # Главный файл HTML с компонентом звёздного рейтинга
-├── styles.css    # Стили для звёзд и селектора
-└── app.js        # JavaScript для динамического обновления звёзд
+## Structure
+
+```text
+index.html              application markup and interaction logic
+theme.css               interface theme styles
+assets/                 icons
+manifest.webmanifest    web app manifest
 ```
 
+## Technologies
 
-## Лицензия
-Этот проект лицензирован по GPL-3.0 — см. файл [LICENSE](LICENSE) для деталей.
+HTML, CSS, JavaScript, SVG, and Web Storage API.
+
+## License
+
+Distribution terms are provided in [LICENSE](LICENSE).
+
+## Author
+
+Denis Gutsuliak ([d9911.org](https://d9911.org/)).
